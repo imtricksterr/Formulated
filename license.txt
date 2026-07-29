@@ -12,7 +12,6 @@ furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
-F1 data provided by **[OpenF1](https://github.com/br-g/openf1?tab=License-1-ov-file)**, used under CC BY-NC-SA 4.0. This project is non commercial
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
