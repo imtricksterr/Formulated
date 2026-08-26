@@ -1,3 +1,7 @@
+# Formulated
+
+A Python/SQL based analysis tool and outcome predictor for the Formula One Racing Series
+
 ## Data Source
 
 Race data has been provided by the [OpenF1 API](https://openf1.org), used under a
