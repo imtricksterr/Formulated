@@ -40,9 +40,9 @@ def get_race_session_keys(year):
 
 
 def concat():
-
     keys_2024 = get_race_session_keys(2024)    
     keys_2025 = get_race_session_keys(2025)
+    retry_keys = []
 
     dataset = pd.DataFrame()
 
@@ -50,19 +50,27 @@ def concat():
         result = fetch_and_merge(key)
         if result is not None:
             dataset = pd.concat([dataset, result], ignore_index=True)
-        time.sleep(2)
-
+        time.sleep(3)
 
     for key in keys_2025:
         result = fetch_and_merge(key)
         if result is not None:
             dataset = pd.concat([dataset, result], ignore_index=True)
-        time.sleep(2)
+        else: retry_keys.append(key)
+        time.sleep(3)
+
+    while retry_keys:
+        print('retrying')
+        result = fetch_and_merge(retry_keys.pop())
+        if result is not None: 
+            dataset = pd.concat([dataset, result], ignore_index=True)
+            print(f'SUCCESS, current_stack: {retry_keys}')
+        time.sleep(3)
 
     return dataset
 
 dataset = concat()
 
 # TEST THESE LATER
-print(dataset["session_key".nunique()])
-print(dataset["position"] == 1)
+#print(dataset["session_key".nunique()])
+#print(dataset["position"] == 1)

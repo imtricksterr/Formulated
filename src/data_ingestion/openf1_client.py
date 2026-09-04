@@ -61,3 +61,5 @@ def main():
     # add retry logic later
 
     return dataset
+
+print(main())
