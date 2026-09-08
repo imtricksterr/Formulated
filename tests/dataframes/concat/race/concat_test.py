@@ -67,7 +67,7 @@ def concat():
             print(f'SUCCESS, current_stack: {retry_keys}')
         time.sleep(3)
 
-    return dataset
+    dataset.to_csv("races_2024_2025.csv", index=False)
 
 dataset = concat()
 

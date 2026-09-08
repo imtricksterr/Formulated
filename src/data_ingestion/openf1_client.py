@@ -35,12 +35,17 @@ def get_race_session_keys(year):
 
     return race_session_keys
 
+    
+def build_csv(name):
+    dataset = concat()
+    dataset.to_csv(f"{name}.csv", index=False)
 
 
-def main():
+def concat():
 
     keys_2024 = get_race_session_keys(2024)    
     keys_2025 = get_race_session_keys(2025)
+    retry_keys = []
 
     dataset = pd.DataFrame()
 
@@ -48,18 +53,24 @@ def main():
         result = fetch_and_merge(key)
         if result is not None:
             dataset = pd.concat([dataset, result], ignore_index=True)
-        time.sleep(2)
+        time.sleep(3)
 
 
     for key in keys_2025:
         result = fetch_and_merge(key)
         if result is not None:
             dataset = pd.concat([dataset, result], ignore_index=True)
-        time.sleep(2)
+        else: retry_keys.append(key)
+        time.sleep(3)
 
+    while retry_keys:
+        result = fetch_and_merge(retry_keys.pop())
+        if result is not None:
+            dataset = pd.concat([dataset, result], ignore_index=True)
+        else: retry_keys.append(result)
 
-    # add retry logic later
+        time.sleep(3)
 
     return dataset
 
-print(main())
+build_csv('test')
