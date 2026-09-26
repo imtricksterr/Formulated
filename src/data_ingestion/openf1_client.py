@@ -72,5 +72,3 @@ def concat():
         time.sleep(3)
 
     return dataset
-
-build_csv('test')
